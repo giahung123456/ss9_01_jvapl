@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Trang Thanh Toán</h2>
+<p th:text="${message}"></p>
+<ul>
+    <li th:each="item : ${items}" th:text="${item}"></li>
+</ul>
+<br>
+<a th:href="@{/cart}">Tiếp tục mua hàng</a>
+</body>
+</html>

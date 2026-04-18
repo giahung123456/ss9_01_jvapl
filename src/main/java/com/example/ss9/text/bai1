@@ -1,0 +1,14 @@
+Phần 1: Phân tích Logic
+Hiện tượng "mất trí nhớ" xảy ra do sự nhầm lẫn về Scope (Phạm vi lưu trữ) của dữ liệu.
+
+Nguyên nhân chính: Bạn đang dùng HttpServletRequest (thông qua request.setAttribute) để lưu trữ giỏ hàng.
+
+Cơ chế của Request: Mỗi khi khách hàng gửi một yêu cầu lên server, một đối tượng HttpServletRequest mới sẽ được tạo ra và nó sẽ bị hủy ngay lập tức sau khi server phản hồi về trình duyệt.
+
+Lỗi do lệnh redirect: Khi bạn dùng return "redirect:/checkout", server sẽ gửi một phản hồi yêu cầu trình duyệt thực hiện một Request hoàn toàn mới đến đường dẫn /checkout.
+
+Tại API /add-to-cart: Giỏ hàng được lưu vào Request A. Sau đó Request A kết thúc.
+
+Tại API /checkout: Một Request B mới tinh được tạo ra. Request B không hề biết gì về dữ liệu đã lưu trong Request A. Đó là lý do tại sao request.getAttribute("myCart") luôn trả về null.
+
+Kết luận: Lỗi nằm ở việc chọn sai công cụ lưu trữ. HttpServletRequest chỉ có vòng đời trong 1 request, không thể sống sót qua lệnh redirect.

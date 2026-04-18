@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Thêm sản phẩm</h2>
+<form th:action="@{/add-to-cart}" method="post">
+    <label>Tên sản phẩm:</label>
+    <input type="text" name="productId" required />
+    <button type="submit">Bấm để thêm</button>
+</form>
+</body>
+</html>
